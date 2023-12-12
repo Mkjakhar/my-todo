@@ -28,6 +28,7 @@
   font-size: 14px;
   color: #334155;
   opacity: 1;
+  background-color: white;
 }
 .todo_box input::placeholder {
   color: #334155;

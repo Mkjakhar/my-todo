@@ -38,6 +38,9 @@ const TodoList: React.FC = () => {
           <div className="list_box rounded_8">
             <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
             <TodoListTwo id="ad" isCompleted={true} tittle="Todo Completed" />
+            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
+            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
+            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
             {/* {todoData.map((val, i) => (
               <TodoDataLists value={val} key={i} />
             ))} */}
