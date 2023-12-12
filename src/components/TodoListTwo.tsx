@@ -8,11 +8,11 @@ interface TodoData {
 
 const TodoListTwo = ({ tittle, id, isCompleted }: TodoData) => {
   const completeTask = () => {
-    console.log("task done");
+    console.log("task done", id);
   };
 
   const deleteTask = () => {
-    console.log("delete task");
+    console.log("delete task", id);
   };
 
   return (
@@ -27,19 +27,13 @@ const TodoListTwo = ({ tittle, id, isCompleted }: TodoData) => {
       </p>
       <div>
         <button onClick={deleteTask} className="border-0 bg-transparent p-0">
-          <TrashIcon
-            onClick={() => console.log(id)}
-            height={24}
-            width={24}
-            className=""
-          />
+          <TrashIcon height={24} width={24} />
         </button>
         <button
           onClick={completeTask}
           className="border-0 bg-transparent p-0 ms-3"
         >
           <CheckCircleIcon
-            onClick={() => console.log(id)}
             height={24}
             width={24}
             style={{ color: isCompleted ? "green" : "gray" }}

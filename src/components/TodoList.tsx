@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent } from "react";
-import TodoListTwo from "./TodoListTwo";
+import TodoDataLists from "./TodoDataLists";
 
 const TodoList: React.FC = () => {
-  const [todoInput, setTodoInput] = useState<string>("");
+  const [todoInput, setTodoInput] = useState("");
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoInput(event.target.value);
@@ -14,7 +14,7 @@ const TodoList: React.FC = () => {
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
       <div className="container">
         <div className="todo_box mx-auto w-100 px-4 rounded_8">
-          <h1 className="todo_heading fw-semibold text-center">Toods</h1>
+          <h1 className="todo_heading fw-semibold text-center">Todos</h1>
           <h3 className="sub_heading fw-medium mb-2">Enter Todo</h3>
           <form
             onSubmit={addTask}
@@ -36,11 +36,11 @@ const TodoList: React.FC = () => {
             </button>
           </form>
           <div className="list_box rounded_8">
-            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
-            <TodoListTwo id="ad" isCompleted={true} tittle="Todo Completed" />
-            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
-            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
-            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
+            <TodoDataLists id="1" isCompleted={false} tittle="Todo One" />
+            <TodoDataLists id="2" isCompleted={true} tittle="Todo two" />
+            <TodoDataLists id="3" isCompleted={false} tittle="Todo three" />
+            <TodoDataLists id="4" isCompleted={false} tittle="Todo four" />
+            <TodoDataLists id="5" isCompleted={true} tittle="Todo five" />
             {/* {todoData.map((val, i) => (
               <TodoDataLists value={val} key={i} />
             ))} */}

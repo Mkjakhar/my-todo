@@ -1,43 +1,44 @@
-import React from "react";
-
-interface TodoData {
-  para: string;
-  styleList: string;
-  deleteIcon: React.ReactNode;
-  tickIcon: React.ReactNode;
-}
+import { TrashIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 
 interface TodoDataListsProps {
-  value: TodoData;
+  tittle: string;
+  id: string;
+  isCompleted: boolean;
 }
 
-const TodoDataLists: React.FC<TodoDataListsProps> = ({ value }) => {
+const TodoDataLists = ({ tittle, id, isCompleted }: TodoDataListsProps) => {
   const completeTask = () => {
-    console.log("task done");
+    console.log("task done", id);
   };
-
   const deleteTask = () => {
-    console.log("delete task");
+    console.log("delete task", id);
   };
-
   return (
-    <div
-      className={`w-100 todo_list px-3 d-flex d-lg-flex align-items-center justify-content-between overflow-hidden ${value.styleList}`}
-    >
-      <p className="todo_para mb-0 fw-regular">{value.para}</p>
+    <div className="w-100 todo_list px-3 d-flex d-lg-flex align-items-center justify-content-between overflow-hidden">
+      <p
+        className={`todo_para mb-0 fw-regular ${
+          isCompleted ? "opacity-50" : ""
+        }`}
+        style={{ textDecoration: isCompleted ? "line-through" : "unset" }}
+      >
+        {tittle}
+      </p>
       <div>
         <button onClick={deleteTask} className="border-0 bg-transparent p-0">
-          {value.deleteIcon}
+          <TrashIcon className="check-icon" height={24} width={24} />
         </button>
         <button
           onClick={completeTask}
           className="border-0 bg-transparent p-0 ms-3"
         >
-          {value.tickIcon}
+          <CheckCircleIcon
+            className={`check-icon ${isCompleted ? "checked-icon" : ""}`}
+            height={24}
+            width={24}
+          />
         </button>
       </div>
     </div>
   );
 };
-
 export default TodoDataLists;

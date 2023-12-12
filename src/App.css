@@ -66,3 +66,15 @@
 .checked_list .tick path {
   fill: #76c745;
 }
+
+.check-icon {
+  color: #64748b;
+  transition: linear 150ms;
+}
+
+.check-icon:hover {
+  opacity: 0.6;
+}
+.checked-icon {
+  color: #76c745;
+}
