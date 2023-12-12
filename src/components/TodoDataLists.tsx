@@ -20,7 +20,7 @@ const TodoDataLists = ({ tittle, id, isCompleted }: TodoDataListsProps) => {
           isCompleted ? "opacity-50 text-decoration-line-through" : ""
         }`}
       >
-        {tittle}
+        h{tittle}
       </p>
       <div>
         <button onClick={deleteTask} className="border-0 bg-transparent p-0">
