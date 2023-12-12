@@ -27,13 +27,19 @@ const TodoListTwo = ({ tittle, id, isCompleted }: TodoData) => {
       </p>
       <div>
         <button onClick={deleteTask} className="border-0 bg-transparent p-0">
-          <TrashIcon height={24} width={24} className="" />
+          <TrashIcon
+            onClick={() => console.log(id)}
+            height={24}
+            width={24}
+            className=""
+          />
         </button>
         <button
           onClick={completeTask}
           className="border-0 bg-transparent p-0 ms-3"
         >
           <CheckCircleIcon
+            onClick={() => console.log(id)}
             height={24}
             width={24}
             style={{ color: isCompleted ? "green" : "gray" }}
