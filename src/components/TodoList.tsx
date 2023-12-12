@@ -1,6 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import TodoDataLists from "./TodoDataLists";
-import { todoData } from "./common/Helper";
+import React, { useState, ChangeEvent } from "react";
+import TodoListTwo from "./TodoListTwo";
 
 const TodoList: React.FC = () => {
   const [todoInput, setTodoInput] = useState<string>("");
@@ -9,7 +8,7 @@ const TodoList: React.FC = () => {
     setTodoInput(event.target.value);
   };
 
-  const addTask = (event: FormEvent) => {};
+  const addTask = () => {};
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
@@ -37,9 +36,11 @@ const TodoList: React.FC = () => {
             </button>
           </form>
           <div className="list_box rounded_8">
-            {todoData.map((val, i) => (
+            <TodoListTwo id="as" isCompleted={false} tittle="Todo One" />
+            <TodoListTwo id="ad" isCompleted={true} tittle="Todo Completed" />
+            {/* {todoData.map((val, i) => (
               <TodoDataLists value={val} key={i} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
