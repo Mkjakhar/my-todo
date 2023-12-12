@@ -17,9 +17,8 @@ const TodoDataLists = ({ tittle, id, isCompleted }: TodoDataListsProps) => {
     <div className="w-100 todo_list px-3 d-flex d-lg-flex align-items-center justify-content-between overflow-hidden">
       <p
         className={`todo_para mb-0 fw-regular ${
-          isCompleted ? "opacity-50" : ""
+          isCompleted ? "opacity-50 text-decoration-line-through" : ""
         }`}
-        style={{ textDecoration: isCompleted ? "line-through" : "unset" }}
       >
         {tittle}
       </p>
