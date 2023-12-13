@@ -1,36 +1,41 @@
-import React, { useState } from "react";
-// import TodoDataLists from "./TodoDataLists";
-
+import React, { useState, useEffect } from "react";
+import TodoDataLists from "./TodoDataLists";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+interface TodoData {
+  id: string;
+  title: string;
+  isCompleted: boolean;
+}
 const TodoList: React.FC = () => {
+  const [todoData, setTodoData] = useState<TodoData[]>([]);
+  useEffect(() => {
+    const getData = async () => {
+      const querySnapshot = await getDocs(collection(db, "todo"));
+      const array: TodoData[] = [];
+      querySnapshot.forEach((doc) => {
+        array.push({
+          id: doc.id,
+          ...doc.data(),
+        } as TodoData);
+      });
+      setTodoData(array);
+    };
+    getData();
+  }, []);
   const [todoInput, setTodoInput] = useState("");
-  // const [tasks, setTasks] = useState([
-  //   { id: "1", title: "Todo one", isCompleted: true },
-  //   { id: "2", title: "Todo two", isCompleted: false },
-  //   { id: "3", title: "Todo three", isCompleted: true },
-  //   { id: "4", title: "Todo four", isCompleted: false },
-  //   { id: "5", title: "Todo five", isCompleted: false },
-  // ]);
 
   const addTask = (e: any) => {
     e.preventDefault();
     // setTasks([...tasks,title:todoInput])
   };
 
-  // const completeTask = (taskId: any) => {
-  //   setTasks((e) =>
-  //     e.map((task) =>
-  //       task.id === taskId
-  //         ? { ...task, isCompleted: !task.isCompleted }
-  //         : task
-  //     )
-  //   );
-  // };
-  // const completeTask = () => {
-  //   console.log("delete task");
-  // };
-  // const deleteTask = () => {
-  //   console.log("delete task");
-  // };
+  const completeTask = () => {
+    console.log("delete task");
+  };
+  const deleteTask = () => {
+    console.log("delete task");
+  };
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
       <div className="container">
@@ -56,7 +61,7 @@ const TodoList: React.FC = () => {
             </button>
           </form>
           <div className="list_box rounded_8">
-            {/* {tasks.map((task) => (
+            {todoData.map((task) => (
               <TodoDataLists
                 key={task.id}
                 id={task.id}
@@ -65,7 +70,7 @@ const TodoList: React.FC = () => {
                 completeTask={completeTask}
                 deleteTask={deleteTask}
               />
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
