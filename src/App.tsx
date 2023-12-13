@@ -49,7 +49,6 @@ function App() {
   };
 
   getData();
-  console.log(todoData);
   const completeTask = () => {
     console.log("delete task");
   };
