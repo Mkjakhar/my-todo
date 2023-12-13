@@ -6,7 +6,6 @@ interface TodoDataListsProps {
   completeTask: () => void;
   deleteTask: () => void;
 }
-
 const TodoDataLists = ({
   tittle,
   id,

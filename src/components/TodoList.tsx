@@ -22,12 +22,14 @@ const TodoList: React.FC = () => {
       setTodoData(array);
     };
     getData();
+    console.log(todoData);
   }, []);
   const [todoInput, setTodoInput] = useState("");
 
   const addTask = (e: any) => {
     e.preventDefault();
     // setTasks([...tasks,title:todoInput])
+    setTodoInput("");
   };
 
   const completeTask = () => {
