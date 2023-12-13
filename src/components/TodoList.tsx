@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import TodoDataLists from "./TodoDataLists";
+// import TodoDataLists from "./TodoDataLists";
 
 const TodoList: React.FC = () => {
   const [todoInput, setTodoInput] = useState("");
-  const [tasks, setTasks] = useState([
-    { id: "1", title: "Todo one", isCompleted: true },
-    { id: "2", title: "Todo two", isCompleted: false },
-    { id: "3", title: "Todo three", isCompleted: true },
-    { id: "4", title: "Todo four", isCompleted: false },
-    { id: "5", title: "Todo five", isCompleted: false },
-  ]);
+  // const [tasks, setTasks] = useState([
+  //   { id: "1", title: "Todo one", isCompleted: true },
+  //   { id: "2", title: "Todo two", isCompleted: false },
+  //   { id: "3", title: "Todo three", isCompleted: true },
+  //   { id: "4", title: "Todo four", isCompleted: false },
+  //   { id: "5", title: "Todo five", isCompleted: false },
+  // ]);
 
   const addTask = (e: any) => {
     e.preventDefault();
@@ -25,12 +25,12 @@ const TodoList: React.FC = () => {
   //     )
   //   );
   // };
-  const completeTask = () => {
-    console.log("delete task");
-  };
-  const deleteTask = () => {
-    console.log("delete task");
-  };
+  // const completeTask = () => {
+  //   console.log("delete task");
+  // };
+  // const deleteTask = () => {
+  //   console.log("delete task");
+  // };
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
       <div className="container">
@@ -56,7 +56,7 @@ const TodoList: React.FC = () => {
             </button>
           </form>
           <div className="list_box rounded_8">
-            {tasks.map((task) => (
+            {/* {tasks.map((task) => (
               <TodoDataLists
                 key={task.id}
                 id={task.id}
@@ -65,7 +65,7 @@ const TodoList: React.FC = () => {
                 completeTask={completeTask}
                 deleteTask={deleteTask}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

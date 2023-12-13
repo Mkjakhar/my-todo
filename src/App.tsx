@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import TodoList from "./components/TodoList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { collection, getDocs } from "firebase/firestore";
@@ -24,7 +24,6 @@ function App() {
   //             ...doc.data(),
   //           } as TodoData)
   //       );
-
   //       setTodoData(data);
   //     })
   //     .catch((error) => {
@@ -57,6 +56,18 @@ function App() {
   const deleteTask = () => {
     console.log("delete task");
   };
+  // const todoDatas: TodoData[] = [];
+
+  // const getDatas = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "my-todo"));
+  //   querySnapshot.forEach((doc) => {
+  //     todoData.push({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     } as TodoData);
+  //   });
+  // };
+  // getDatas();
   return (
     <>
       <TodoList />
