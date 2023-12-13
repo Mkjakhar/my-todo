@@ -1,35 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEventHandler } from "react";
 import TodoDataLists from "./TodoDataLists";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 interface TodoData {
   id: string;
   title: string;
   isCompleted: boolean;
 }
+type Status = "loading" | "error" | "success";
 const TodoList: React.FC = () => {
   const [todoData, setTodoData] = useState<TodoData[]>([]);
+  const [status, setStatus] = useState<Status>("loading");
+  const [error, setError] = useState("This is error");
+  const getData = async () => {
+    setStatus("loading");
+    const querySnapshot = await getDocs(collection(db, "todo"));
+    const array: TodoData[] = [];
+    querySnapshot.forEach((doc) => {
+      array.push({
+        id: doc.id,
+        ...doc.data(),
+      } as TodoData);
+    });
+    setTodoData(array);
+    setStatus("success");
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      const querySnapshot = await getDocs(collection(db, "todo"));
-      const array: TodoData[] = [];
-      querySnapshot.forEach((doc) => {
-        array.push({
-          id: doc.id,
-          ...doc.data(),
-        } as TodoData);
-      });
-      setTodoData(array);
-    };
     getData();
     console.log(todoData);
   }, []);
   const [todoInput, setTodoInput] = useState("");
 
-  const addTask = (e: any) => {
+  const addTask: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    setStatus("loading");
     e.preventDefault();
-    // setTasks([...tasks,title:todoInput])
-    setTodoInput("");
+    if (todoInput === "") {
+      setStatus("error");
+    } else {
+      await addDoc(collection(db, "todo"), {
+        title: todoInput,
+        isCompleted: false,
+      })
+        .catch((err) => setError(err))
+        .finally(() => getData());
+      setStatus("success");
+      setTodoInput("");
+    }
   };
 
   const completeTask = () => {
@@ -40,9 +57,19 @@ const TodoList: React.FC = () => {
   };
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
+      {status === "loading" && (
+        <div className="position-fixed d-flex align-items-center justify-content-center z-3 top-0 start-0 w-100 min-vh-100 bg-white">
+          Loading...
+        </div>
+      )}
       <div className="container">
         <div className="todo_box mx-auto w-100 px-4 rounded_8">
           <h1 className="todo_heading fw-semibold text-center">Todos</h1>
+          {status === "error" && (
+            <p className="px-4 py-3 bg-danger-500 rounded_8 text-danger">
+              {error}
+            </p>
+          )}
           <h3 className="sub_heading fw-medium mb-2">Enter Todo</h3>
           <form className="w-100 d-flex rounded-2 overflow-hidden p-1">
             <input
