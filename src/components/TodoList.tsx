@@ -25,10 +25,8 @@ const TodoList: React.FC = () => {
     setTodoData(array);
     setStatus("success");
   };
-
   useEffect(() => {
     getData();
-    console.log(todoData);
   }, []);
   const [todoInput, setTodoInput] = useState("");
 
@@ -82,7 +80,6 @@ const TodoList: React.FC = () => {
               className="w-100 border-0 px-3 px-sm-4"
             />
             <button
-              type="submit"
               onClick={addTask}
               className="add_btn rounded-2 text-white fw-semibold border-0"
             >
