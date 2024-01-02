@@ -5,6 +5,7 @@ import {
   getDocs,
   addDoc,
   deleteDoc,
+  updateDoc,
   doc,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
@@ -53,8 +54,20 @@ const TodoList: React.FC = () => {
     }
   };
 
-  const completeTask = () => {
-    console.log("delete task");
+  const completeTask = async (id: string) => {
+    setStatus("loading");
+    const editElem = todoData.find((data) => data.id === id);
+    if (editElem) {
+      const updatedElem = doc(db, "todo", editElem.id);
+      await updateDoc(updatedElem, {
+        isCompleted: true,
+      });
+      getData();
+      setStatus("success");
+    } else {
+      console.error(`Element with id ${id} not found`);
+      setStatus("error");
+    }
   };
   const deleteTask = async (id: string) => {
     setStatus("loading");
@@ -109,7 +122,7 @@ const TodoList: React.FC = () => {
                   id={task.id}
                   tittle={task.title}
                   isCompleted={task.isCompleted}
-                  completeTask={completeTask}
+                  completeTask={() => completeTask(task.id)}
                   deleteTask={() => deleteTask(task.id)}
                 />
               ))
