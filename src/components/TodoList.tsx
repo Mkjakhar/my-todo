@@ -1,6 +1,12 @@
 import React, { useState, useEffect, MouseEventHandler } from "react";
 import TodoDataLists from "./TodoDataLists";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 interface TodoData {
   id: string;
@@ -50,8 +56,17 @@ const TodoList: React.FC = () => {
   const completeTask = () => {
     console.log("delete task");
   };
-  const deleteTask = () => {
-    console.log("delete task");
+  const deleteTask = async (id: string) => {
+    setStatus("loading");
+    const deletedElem = todoData.find((data) => data.id === id);
+    if (deletedElem) {
+      await deleteDoc(doc(db, "todo", deletedElem.id));
+      getData();
+      setStatus("success");
+    } else {
+      console.error(`Element with id ${id} not found`);
+      setStatus("error");
+    }
   };
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center todo_bg">
@@ -86,17 +101,23 @@ const TodoList: React.FC = () => {
               Add
             </button>
           </form>
-          <div className="list_box rounded_8">
-            {todoData.map((task) => (
-              <TodoDataLists
-                key={task.id}
-                id={task.id}
-                tittle={task.title}
-                isCompleted={task.isCompleted}
-                completeTask={completeTask}
-                deleteTask={deleteTask}
-              />
-            ))}
+          <div className="list_box rounded_8 overflow-hidden">
+            {todoData.length ? (
+              todoData.map((task) => (
+                <TodoDataLists
+                  key={task.id}
+                  id={task.id}
+                  tittle={task.title}
+                  isCompleted={task.isCompleted}
+                  completeTask={completeTask}
+                  deleteTask={() => deleteTask(task.id)}
+                />
+              ))
+            ) : (
+              <p className="mb-0 todo_para text-danger bg-danger-500 px-2 py-3 border-danger">
+                No Todos Yet
+              </p>
+            )}
           </div>
         </div>
       </div>
